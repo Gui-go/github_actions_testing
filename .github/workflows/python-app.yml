@@ -1,9 +1,18 @@
-name: Python application
+name: github_actions_testing
 
-on:
-  push:
-    branches: [ master ]
+on: [push]
 
-runs:
-  using: 'docker'
-  image: 'Dockerfile'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+#    - name: docker login
+#      env:
+#        DOCKER_USER: ${{ secrets.DOCKER_USER }}   
+#        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}  
+#      run: |
+#        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - name: docker build flask api
+      run: |
+        docker build .
